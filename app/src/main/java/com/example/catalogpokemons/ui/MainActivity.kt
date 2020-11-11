@@ -1,7 +1,8 @@
-package com.example.catalogpokemons
+package com.example.catalogpokemons.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.catalogpokemons.R
 
 class MainActivity : AppCompatActivity() {
 
