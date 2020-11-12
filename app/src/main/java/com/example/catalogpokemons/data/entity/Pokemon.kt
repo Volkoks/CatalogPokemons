@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Pokemon(
-//    var base_experience: Float,
-//    var height: Float,
-//    var id: Int,
     var name: String,
+    var base_experience: Int,
+    var height: Int,
+    var id: Int = -1,
 //    var order: Float,
 //    val sprites: Sprites
 ) : Parcelable {
