@@ -16,7 +16,7 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-
+        loadData()
     }
 
     private fun loadData() {
@@ -25,6 +25,7 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
                 { listPokemons -> listPresenter.pokemons.addAll(listPokemons) },
                 { error -> println("Ошибка: ${error}") }
             )
+        viewState.updateList()
     }
 
     inner class PokemonListPresenter : IPokemonListPresenter {
