@@ -1,4 +1,4 @@
-package com.example.catalogpokemons.ui
+package com.example.catalogpokemons.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
