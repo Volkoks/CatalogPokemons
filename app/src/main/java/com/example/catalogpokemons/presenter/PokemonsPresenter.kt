@@ -42,7 +42,7 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
 
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
-            view.setName(pokemon.name)
+            view.bind(pokemon)
         }
 
     }

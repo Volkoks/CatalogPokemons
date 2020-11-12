@@ -1,5 +1,7 @@
 package com.example.catalogpokemons.view
 
+import com.example.catalogpokemons.data.entity.Pokemon
+
 interface PokemonItemView : IItemView{
-    fun setName(name:String)
+    fun bind(pokemon:Pokemon)
 }
