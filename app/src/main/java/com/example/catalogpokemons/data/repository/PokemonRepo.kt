@@ -6,9 +6,9 @@ import io.reactivex.rxjava3.core.Observable
 class PokemonRepo {
 
     private val localRepo = listOf(
-        Pokemon("Пикачу"),
-        Pokemon("Бульбазабр"),
-        Pokemon("Сквидвард")
+        Pokemon("Пикачу",99, 1),
+        Pokemon("Бульбазабр",56,2),
+        Pokemon("Сквидвард",1,3)
     )
 //        Метод для получения листа через Rx
     fun getPokemon(): Observable<List<Pokemon>> {
