@@ -5,7 +5,7 @@ import com.example.catalogpokemons.ui.PokemonsFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {
-    class PokemonScreen : SupportAppScreen() {
+    class PokemonsScreen : SupportAppScreen() {
         override fun getFragment() = PokemonsFragment.newInstance()
     }
 }
