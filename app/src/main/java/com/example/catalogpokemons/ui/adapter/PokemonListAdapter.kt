@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catalogpokemons.R
-
+import com.example.catalogpokemons.data.entity.Pokemon
 import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.view.PokemonItemView
 import kotlinx.android.extensions.LayoutContainer
@@ -35,8 +35,9 @@ class PokemonListAdapter(val presenter: IPokemonListPresenter) :
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer, PokemonItemView {
 
-        override fun setName(name: String) = with(containerView) {
-            pokemon_name_tv_card.text = name
+        override fun bind(pokemon: Pokemon) = with(containerView) {
+            pokemon_name_tv_card.text = pokemon.name
+            base_experience_tv_card.text = pokemon.base_experience.toString()
         }
 
         override var pos = -1
