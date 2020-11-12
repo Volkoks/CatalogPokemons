@@ -2,6 +2,7 @@ package com.example.catalogpokemons.presenter
 
 import com.example.catalogpokemons.data.entity.Pokemon
 import com.example.catalogpokemons.data.repository.PokemonRepo
+import com.example.catalogpokemons.navigator.Screens
 import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.view.PokemonItemView
 import com.example.catalogpokemons.view.PokemonsView
@@ -17,6 +18,10 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
         super.onFirstViewAttach()
         viewState.init()
         loadData()
+        listPresenter.itemClickListener = {
+            val pokemon = listPresenter.pokemons[it.pos]
+            router.navigateTo(Screens.PokemonScreen(pokemon))
+        }
     }
 
     private fun loadData() {
