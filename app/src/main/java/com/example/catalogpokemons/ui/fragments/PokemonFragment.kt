@@ -35,11 +35,8 @@ class PokemonFragment : MvpAppCompatFragment(), PokemonView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val v = View.inflate(context, R.layout.fragment_pokemon, null)
+    ) = View.inflate(context, R.layout.fragment_pokemon, null)
 
-        return v
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
