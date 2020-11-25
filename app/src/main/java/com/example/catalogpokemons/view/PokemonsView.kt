@@ -8,4 +8,5 @@ import moxy.viewstate.strategy.StateStrategyType
 interface PokemonsView:MvpView {
     fun init()
     fun updateList()
+    fun snowError(error:Throwable)
 }

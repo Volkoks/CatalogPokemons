@@ -1,29 +1,36 @@
 package com.example.catalogpokemons.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.data.repository.PokemonRepo
+import com.example.catalogpokemons.data.retrofit.api.ApiHolder
+import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemon
 import com.example.catalogpokemons.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import com.example.catalogpokemons.view.PokemonsView
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-
+/**
+ * Фрагмент эрана с листом Покемонов
+ */
 class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     companion object {
         fun newInstance() = PokemonsFragment()
     }
 
     val presenter: PokemonsPresenter by moxyPresenter {
-        PokemonsPresenter(PokemonRepo(), PokemonApp.instance.getRouter)
+        PokemonsPresenter(
+            AndroidSchedulers.mainThread(),
+            LoaderPokemon(ApiHolder.api),
+            PokemonApp.instance.getRouter)
     }
     var adapter: PokemonListAdapter? = null
 
@@ -40,5 +47,9 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
 
     override fun updateList() {
         adapter?.notifyDataSetChanged()
+    }
+
+    override fun snowError(error: Throwable) {
+        Toast.makeText(context,"Ошибка: ${error}",Toast.LENGTH_SHORT).show()
     }
 }

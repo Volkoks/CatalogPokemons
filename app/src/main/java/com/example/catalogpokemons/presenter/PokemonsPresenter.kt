@@ -1,15 +1,20 @@
 package com.example.catalogpokemons.presenter
 
-import com.example.catalogpokemons.data.entity.Pokemon
-import com.example.catalogpokemons.data.repository.PokemonRepo
+import com.example.catalogpokemons.data.retrofit.entity.Pokemon
+import com.example.catalogpokemons.data.retrofit.repository.IPokemonRepos
 import com.example.catalogpokemons.navigator.Screens
 import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.view.PokemonItemView
 import com.example.catalogpokemons.view.PokemonsView
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
-class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
+class PokemonsPresenter(
+    val mainThread: Scheduler,
+    val repository: IPokemonRepos,
+    val router: Router
+) :
     MvpPresenter<PokemonsView>() {
 
     val listPresenter = PokemonListPresenter()
@@ -25,13 +30,20 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
     }
 
     private fun loadData() {
-        repository.getPokemon()
-            .subscribe(
-                { listPokemons -> listPresenter.pokemons.addAll(listPokemons) },
-                { error -> println("Ошибка: ${error}") }
-            )
-        viewState.updateList()
+        for (i in 1..1000) {
+            repository.getPokemon(i)
+                .observeOn(mainThread)
+                .subscribe(
+                    { pokemon ->
+                        listPresenter.pokemons.add(pokemon)
+                        listPresenter.pokemons.sortBy { it.id }
+                        viewState.updateList()
+                    },
+                    { error -> viewState.snowError(error) }
+                )
+        }
     }
+
 
     inner class PokemonListPresenter : IPokemonListPresenter {
         var pokemons = mutableListOf<Pokemon>()
@@ -42,7 +54,7 @@ class PokemonsPresenter(val repository: PokemonRepo, val router: Router) :
 
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
-            view.bind(pokemon)
+            pokemon?.let { view.bind(it) }
         }
 
     }

@@ -13,13 +13,22 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary_light"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pokemon_id_tv_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="id"
+            android:textColor="@color/primary_dark"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pokemon_name_tv_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +43,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/pokemon_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +51,7 @@
             android:layout_marginRight="3dp"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/base_experience_tv_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,5 +65,5 @@
             android:textDirection="locale"
             android:textSize="18sp"
             android:textStyle="bold" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>
