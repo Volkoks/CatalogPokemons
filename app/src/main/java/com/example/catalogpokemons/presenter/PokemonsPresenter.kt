@@ -54,7 +54,9 @@ class PokemonsPresenter(
 
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
-            pokemon?.let { view.bind(it) }
+            pokemon?.let {
+                view.bind(it)
+                view.loadImg(it.sprites.front_default)}
         }
 
     }

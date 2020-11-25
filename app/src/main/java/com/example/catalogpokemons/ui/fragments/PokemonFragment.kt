@@ -1,26 +1,27 @@
 package com.example.catalogpokemons.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.data.POKEMON
-import com.example.catalogpokemons.data.entity.Pokemon
+import com.example.catalogpokemons.data.retrofit.entity.Pokemon
 import com.example.catalogpokemons.presenter.PokemonPresenter
 import com.example.catalogpokemons.view.PokemonView
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-
+/**
+ * Фрагмент экрана Покемона(Здесь осуществляется отображение всех данных для одного покемона)
+ */
 class PokemonFragment : MvpAppCompatFragment(), PokemonView {
 
     companion object {
         fun newInstance(pokemon: Pokemon): PokemonFragment {
             val fragment = PokemonFragment()
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putParcelable(POKEMON, pokemon)
             fragment.arguments = bundle
             return fragment
@@ -45,7 +46,7 @@ class PokemonFragment : MvpAppCompatFragment(), PokemonView {
 
     override fun init() {
         pokemon_name_tv.text = pokemon?.name
-        base_experience_tv.text = pokemon?.base_experience.toString()
+        base_experience_tv.text = pokemon?.baseExperience.toString()
         height_tv.text = pokemon?.height.toString()
     }
 }
