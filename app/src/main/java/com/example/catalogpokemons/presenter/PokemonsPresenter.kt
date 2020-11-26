@@ -36,16 +36,19 @@ class PokemonsPresenter(
                 .subscribe(
                     { pokemon ->
                         listPresenter.pokemons.add(pokemon)
-                        listPresenter.pokemons.sortBy { it.id }
                         viewState.updateList()
                     },
-                    { error -> viewState.snowError(error) }
+                    { error ->
+                        viewState.snowError(error)
+                    }
                 )
         }
+
     }
 
 
     inner class PokemonListPresenter : IPokemonListPresenter {
+
         var pokemons = mutableListOf<Pokemon>()
         override var itemClickListener: ((PokemonItemView) -> Unit)? = null
 
@@ -54,9 +57,10 @@ class PokemonsPresenter(
 
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
-            pokemon?.let {
+            pokemon.let {
                 view.bind(it)
-                view.loadImg(it.sprites.front_default)}
+                view.loadImg(it.sprites.front_default)
+            }
         }
 
     }

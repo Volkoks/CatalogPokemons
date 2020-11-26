@@ -5,5 +5,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 interface IPokemonRepos {
-    fun getPokemon(id:Int):Single<Pokemon>
+    fun getPokemon(id:Int):Observable<Pokemon>
+
 }
