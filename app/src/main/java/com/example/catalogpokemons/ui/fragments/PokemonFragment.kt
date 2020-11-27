@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.data.POKEMON
+import com.example.catalogpokemons.data.retrofit.entity.Results
 import com.example.catalogpokemons.data.retrofit.entity.Pokemon
 import com.example.catalogpokemons.presenter.PokemonPresenter
 import com.example.catalogpokemons.view.PokemonView
@@ -31,7 +32,7 @@ class PokemonFragment : MvpAppCompatFragment(), PokemonView {
     private val presenter: PokemonPresenter by moxyPresenter {
         PokemonPresenter()
     }
-    private var pokemon: Pokemon? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +42,10 @@ class PokemonFragment : MvpAppCompatFragment(), PokemonView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pokemon = arguments?.getParcelable(POKEMON)
+
     }
 
     override fun init() {
-        pokemon_name_tv.text = pokemon?.name
-        base_experience_tv.text = pokemon?.baseExperience.toString()
-        height_tv.text = pokemon?.height.toString()
+
     }
 }

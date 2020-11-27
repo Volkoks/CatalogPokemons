@@ -10,20 +10,20 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Pokemon(
     @Expose
-    val id: Int,
+    val id: Int? = null,
     @Expose
-    val name: String,
+    val name: String? = null,
     @Expose
-    val baseExperience: Int,
+    val baseExperience: Int? = null,
     @Expose
-    val height: Int,
+    val height: Int? = null,
     @Expose
-    val isDefault: Boolean,
+    val isDefault: Boolean? = null,
     @Expose
-    val order: Int,
+    val order: Int? = null,
     @Expose
-    val weight: Int,
+    val weight: Int? = null,
     @Expose
-    val sprites:Sprites
+    val sprites:Sprites? = null
 ) : Parcelable {
 }

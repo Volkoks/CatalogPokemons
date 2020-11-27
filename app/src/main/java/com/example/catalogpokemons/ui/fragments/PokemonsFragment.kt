@@ -1,6 +1,7 @@
 package com.example.catalogpokemons.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
 import com.example.catalogpokemons.data.retrofit.api.ApiHolder
 import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
-import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemon
+import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemons
 import com.example.catalogpokemons.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import com.example.catalogpokemons.view.PokemonsView
@@ -30,7 +31,7 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     val presenter: PokemonsPresenter by moxyPresenter {
         PokemonsPresenter(
             AndroidSchedulers.mainThread(),
-            LoaderPokemon(ApiHolder.api),
+            LoaderPokemons(ApiHolder.api),
             PokemonApp.instance.getRouter)
     }
     var adapter: PokemonListAdapter? = null
@@ -52,5 +53,6 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
 
     override fun snowError(error: Throwable) {
         Toast.makeText(context,"Ошибка: ${error}",Toast.LENGTH_SHORT).show()
+        Log.d("ОШИБКА RETROFIT",error.message.toString())
     }
 }
