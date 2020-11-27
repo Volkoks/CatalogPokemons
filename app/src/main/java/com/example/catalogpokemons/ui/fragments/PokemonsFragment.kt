@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
+import com.example.catalogpokemons.data.APP_NAME
 import com.example.catalogpokemons.data.retrofit.api.ApiHolder
 import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
 import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemons
@@ -54,5 +55,10 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     override fun snowError(error: Throwable) {
         Toast.makeText(context,"Ошибка: ${error}",Toast.LENGTH_SHORT).show()
         Log.d("ОШИБКА RETROFIT",error.message.toString())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.title = APP_NAME
     }
 }

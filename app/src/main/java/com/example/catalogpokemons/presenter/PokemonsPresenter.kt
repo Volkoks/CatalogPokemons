@@ -18,7 +18,7 @@ class PokemonsPresenter(
 ) :
     MvpPresenter<PokemonsView>() {
 
-    val listPresenter = PokemonListPresenter(mainThread, repository)
+    val listPresenter = PokemonListPresenter()
     private var listResult: List<Results>? = null
 
     override fun onFirstViewAttach() {
@@ -56,7 +56,7 @@ class PokemonsPresenter(
     }
 
 
-    inner class PokemonListPresenter(val mainThread: Scheduler, val repository: IPokemonsRepos) :
+    inner class PokemonListPresenter() :
         IPokemonListPresenter {
 
         var pokemons = mutableListOf<Pokemon>()
