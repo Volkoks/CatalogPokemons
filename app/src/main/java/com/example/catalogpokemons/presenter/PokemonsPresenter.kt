@@ -1,7 +1,8 @@
 package com.example.catalogpokemons.presenter
 
 import com.example.catalogpokemons.data.retrofit.entity.Pokemon
-import com.example.catalogpokemons.data.retrofit.repository.IPokemonRepos
+import com.example.catalogpokemons.data.retrofit.entity.Results
+import com.example.catalogpokemons.data.retrofit.repository.IPokemonsRepos
 import com.example.catalogpokemons.navigator.Screens
 import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.view.PokemonItemView
@@ -12,12 +13,13 @@ import ru.terrakok.cicerone.Router
 
 class PokemonsPresenter(
     val mainThread: Scheduler,
-    val repository: IPokemonRepos,
+    val repository: IPokemonsRepos,
     val router: Router
 ) :
     MvpPresenter<PokemonsView>() {
 
-    val listPresenter = PokemonListPresenter()
+    val listPresenter = PokemonListPresenter(mainThread, repository)
+    private var listResult: List<Results>? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -30,24 +32,32 @@ class PokemonsPresenter(
     }
 
     private fun loadData() {
-        for (i in 1..1000) {
-            repository.getPokemon(i)
-                .observeOn(mainThread)
-                .subscribe(
-                    { pokemon ->
-                        listPresenter.pokemons.add(pokemon)
-                        viewState.updateList()
-                    },
-                    { error ->
-                        viewState.snowError(error)
+        repository.getPokemons()
+            .subscribe(
+                { pokemons ->
+                    listResult = pokemons.results
+                    listResult?.forEach {
+                        it.url?.let { it1 ->
+                            repository.getPokemon(it1)
+                                .observeOn(mainThread)
+                                .subscribe({ pokemon ->
+                                    listPresenter.pokemons.add(pokemon)
+                                    listPresenter.pokemons.sortBy { it.id }
+                                    viewState.updateList()
+                                })
+                        }
                     }
-                )
-        }
+                },
+                { error ->
+                    viewState.snowError(error)
+                }
+            )
 
     }
 
 
-    inner class PokemonListPresenter : IPokemonListPresenter {
+    inner class PokemonListPresenter(val mainThread: Scheduler, val repository: IPokemonsRepos) :
+        IPokemonListPresenter {
 
         var pokemons = mutableListOf<Pokemon>()
         override var itemClickListener: ((PokemonItemView) -> Unit)? = null
@@ -57,11 +67,8 @@ class PokemonsPresenter(
 
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
-            pokemon.let {
-                view.bind(it)
-                view.loadImg(it.sprites.front_default)
-            }
+            view.bind(pokemon)
+            pokemon.sprites?.front_default?.let { view.loadImg(it) }
         }
-
     }
 }
