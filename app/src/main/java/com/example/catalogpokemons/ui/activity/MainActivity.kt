@@ -8,21 +8,29 @@ import com.example.catalogpokemons.presenter.MainActivityPresenter
 import com.example.catalogpokemons.view.MainActivityView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainActivityView {
 
     private val presenter: MainActivityPresenter by moxyPresenter {
-        MainActivityPresenter(PokemonApp.instance.getRouter)
+        MainActivityPresenter().apply {
+            PokemonApp.instance.appComponent.inject(this)
+        }
     }
-    private val navigatorHolder = PokemonApp.instance.navigatorHolder
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
     private val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        PokemonApp.instance.appComponent.inject(this)
         setContentView(R.layout.activity_main)
 
     }
+
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)

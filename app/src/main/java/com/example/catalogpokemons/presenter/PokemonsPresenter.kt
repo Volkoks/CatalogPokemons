@@ -10,13 +10,17 @@ import com.example.catalogpokemons.view.PokemonsView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class PokemonsPresenter(
-    val mainThread: Scheduler,
-    val repository: IPokemonsRepos,
-    val router: Router
-) :
-    MvpPresenter<PokemonsView>() {
+class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
+    @Inject
+    lateinit var mainThread: Scheduler
+
+    @Inject
+    lateinit var repository: IPokemonsRepos
+
+    @Inject
+    lateinit var router: Router
 
     val listPresenter = PokemonListPresenter()
     private var listResult: List<Results>? = null

@@ -8,7 +8,7 @@ import com.example.catalogpokemons.data.retrofit.repository.IPokemonsRepos
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LoaderPokemons(val api: IPokemonDataSource) : IPokemonsRepos {
+class PokemonsRepo(val api: IPokemonDataSource) : IPokemonsRepos {
 
 
     override fun getPokemons() = api.getPokemons().subscribeOn(Schedulers.io())

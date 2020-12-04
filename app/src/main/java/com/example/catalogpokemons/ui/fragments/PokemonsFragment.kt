@@ -12,7 +12,7 @@ import com.example.catalogpokemons.app.PokemonApp
 import com.example.catalogpokemons.data.APP_NAME
 import com.example.catalogpokemons.data.retrofit.api.ApiHolder
 import com.example.catalogpokemons.view.image.GlideImgLoader
-import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemons
+import com.example.catalogpokemons.data.retrofit.loader.PokemonsRepo
 import com.example.catalogpokemons.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import com.example.catalogpokemons.view.PokemonsView
@@ -30,10 +30,10 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     }
 
     val presenter: PokemonsPresenter by moxyPresenter {
-        PokemonsPresenter(
-            AndroidSchedulers.mainThread(),
-            LoaderPokemons(ApiHolder.api),
-            PokemonApp.instance.getRouter)
+        PokemonsPresenter().apply {
+            PokemonApp.instance.appComponent.inject(this)
+        }
+
     }
     var adapter: PokemonListAdapter? = null
 

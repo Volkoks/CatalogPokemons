@@ -7,16 +7,19 @@ import com.example.catalogpokemons.view.MainActivityView
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
-class MainActivityPresenter(val router: Router): MvpPresenter<MainActivityView>() {
+class MainActivityPresenter() : MvpPresenter<MainActivityView>() {
 
-
+    @Inject
+    lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         router.replaceScreen(Screens.PokemonsScreen())
     }
-    fun backClicked(){
+
+    fun backClicked() {
         router.exit()
     }
 }
