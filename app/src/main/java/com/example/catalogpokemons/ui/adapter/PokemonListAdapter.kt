@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catalogpokemons.R
-import com.example.catalogpokemons.data.retrofit.entity.Pokemon
-import com.example.catalogpokemons.data.retrofit.loader.IImageLoader
+import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.view.image.IImageLoader
 import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.view.PokemonItemView
 import kotlinx.android.extensions.LayoutContainer

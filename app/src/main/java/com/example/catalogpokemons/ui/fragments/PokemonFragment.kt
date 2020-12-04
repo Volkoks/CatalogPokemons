@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.data.POKEMON
-import com.example.catalogpokemons.data.retrofit.entity.Results
-import com.example.catalogpokemons.data.retrofit.entity.Pokemon
-import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
-import com.example.catalogpokemons.data.retrofit.loader.IImageLoader
+import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.view.image.GlideImgLoader
+import com.example.catalogpokemons.view.image.IImageLoader
 import com.example.catalogpokemons.presenter.PokemonPresenter
 import com.example.catalogpokemons.view.PokemonView
 import kotlinx.android.synthetic.main.fragment_pokemon.*

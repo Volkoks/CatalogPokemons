@@ -1,4 +1,4 @@
-package com.example.catalogpokemons.data.retrofit.loader
+package com.example.catalogpokemons.view.image
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

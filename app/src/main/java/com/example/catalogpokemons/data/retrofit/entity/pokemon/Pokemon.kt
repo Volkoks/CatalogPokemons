@@ -1,8 +1,9 @@
-package com.example.catalogpokemons.data.retrofit.entity
+package com.example.catalogpokemons.data.retrofit.entity.pokemon
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 /**
  * Класс сущности Покемона для Retrofit
@@ -24,6 +25,6 @@ data class Pokemon(
     @Expose
     val weight: Int? = null,
     @Expose
-    val sprites:Sprites? = null
+    val sprites: @RawValue Sprites? = null
 ) : Parcelable {
 }

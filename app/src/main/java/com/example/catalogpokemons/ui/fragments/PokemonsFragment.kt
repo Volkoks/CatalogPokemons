@@ -11,7 +11,7 @@ import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
 import com.example.catalogpokemons.data.APP_NAME
 import com.example.catalogpokemons.data.retrofit.api.ApiHolder
-import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
+import com.example.catalogpokemons.view.image.GlideImgLoader
 import com.example.catalogpokemons.data.retrofit.loader.LoaderPokemons
 import com.example.catalogpokemons.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
@@ -44,7 +44,7 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
 
     override fun init() {
         pokemons_rv.layoutManager = GridLayoutManager(context, 2)
-        adapter = PokemonListAdapter(presenter.listPresenter,GlideImgLoader())
+        adapter = PokemonListAdapter(presenter.listPresenter, GlideImgLoader())
         pokemons_rv.adapter = adapter
     }
 

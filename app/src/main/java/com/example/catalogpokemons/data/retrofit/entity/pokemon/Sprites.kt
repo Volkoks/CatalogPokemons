@@ -1,10 +1,10 @@
-package com.example.catalogpokemons.data.retrofit.entity
+package com.example.catalogpokemons.data.retrofit.entity.pokemon
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
+
 data class Sprites(
     @Expose
     var back_default: String,
@@ -21,6 +21,7 @@ data class Sprites(
     @Expose
     var front_shiny: String,
     @Expose
-    var front_shiny_female: String
-) : Parcelable {
-}
+    var front_shiny_female: String,
+    @Expose
+    var other: Other? = null
+)

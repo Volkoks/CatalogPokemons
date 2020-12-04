@@ -1,7 +1,6 @@
 package com.example.catalogpokemons.presenter
 
-import com.example.catalogpokemons.data.retrofit.entity.Pokemon
-import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
+import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.view.PokemonView
 import moxy.MvpPresenter
 

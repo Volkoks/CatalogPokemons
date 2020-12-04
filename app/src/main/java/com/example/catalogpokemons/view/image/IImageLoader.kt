@@ -1,4 +1,4 @@
-package com.example.catalogpokemons.data.retrofit.loader
+package com.example.catalogpokemons.view.image
 
 interface IImageLoader<T> {
     fun imageLoad(url:String,container:T)

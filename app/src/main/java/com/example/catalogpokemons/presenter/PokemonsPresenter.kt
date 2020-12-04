@@ -1,6 +1,6 @@
 package com.example.catalogpokemons.presenter
 
-import com.example.catalogpokemons.data.retrofit.entity.Pokemon
+import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.data.retrofit.entity.Results
 import com.example.catalogpokemons.data.retrofit.repository.IPokemonsRepos
 import com.example.catalogpokemons.navigator.Screens
