@@ -5,13 +5,13 @@ import com.example.catalogpokemons.data.room.entity.RoomPokemon
 
 @Dao
 interface PokemonDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemon(pokemon: RoomPokemon)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemon(vararg pokemon: RoomPokemon)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPokemon(listPokemon: List<RoomPokemon>)
 
     @Update

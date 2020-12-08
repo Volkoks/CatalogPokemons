@@ -3,6 +3,7 @@ package com.example.catalogpokemons.presenter
 import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.data.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
 import com.example.catalogpokemons.view.PokemonView
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import javax.inject.Inject
 
@@ -12,7 +13,9 @@ import javax.inject.Inject
 class PokemonPresenter() : MvpPresenter<PokemonView>() {
 
     @Inject
-    lateinit var db: IFavoritesPokemonsRepo
+    lateinit var favoritesPokemonRepo : IFavoritesPokemonsRepo
+    @Inject
+    lateinit var mainThread: Scheduler
 
     var pokemon: Pokemon? = null
 
@@ -27,7 +30,7 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
 
     fun addPokemonInFavorites(){
         pokemon?.let {
-            db.addPokemon(pokemon)
+            favoritesPokemonRepo.addPokemon(pokemon).observeOn(mainThread).subscribe()
         }
     }
 

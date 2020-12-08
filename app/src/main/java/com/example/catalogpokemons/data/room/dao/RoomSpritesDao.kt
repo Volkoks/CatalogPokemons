@@ -5,13 +5,13 @@ import com.example.catalogpokemons.data.room.entity.RoomSprites
 
 @Dao
 interface RoomSpritesDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSprites(roomSprites: RoomSprites)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSprites(vararg roomSprites: RoomSprites)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSprites(listSprites:List<RoomSprites>)
 
     @Update
