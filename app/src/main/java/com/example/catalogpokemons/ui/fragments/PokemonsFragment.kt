@@ -2,21 +2,16 @@ package com.example.catalogpokemons.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
 import com.example.catalogpokemons.data.APP_NAME
-import com.example.catalogpokemons.data.retrofit.api.ApiHolder
 import com.example.catalogpokemons.view.image.GlideImgLoader
-import com.example.catalogpokemons.data.retrofit.loader.PokemonsRepo
 import com.example.catalogpokemons.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import com.example.catalogpokemons.view.PokemonsView
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -40,7 +35,25 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = View.inflate(context, R.layout.fragment_pokemons, null)
+    ): View? {
+        setHasOptionsMenu(true)
+        val v = View.inflate(context, R.layout.fragment_pokemons, null)
+        return v
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_pokemons_fragment,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.favotites_item_menu->{
+                presenter.replaceToFavoritesPokemonsFragment()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun init() {
         pokemons_rv.layoutManager = GridLayoutManager(context, 2)
@@ -53,8 +66,8 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     }
 
     override fun snowError(error: Throwable) {
-        Toast.makeText(context,"Ошибка: ${error}",Toast.LENGTH_SHORT).show()
-        Log.d("ОШИБКА RETROFIT",error.message.toString())
+        Toast.makeText(context, "Ошибка: ${error}", Toast.LENGTH_SHORT).show()
+        Log.d("ОШИБКА RETROFIT", error.message.toString())
     }
 
     override fun onResume() {

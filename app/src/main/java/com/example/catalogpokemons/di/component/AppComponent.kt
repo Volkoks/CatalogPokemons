@@ -1,9 +1,6 @@
 package com.example.catalogpokemons.di.component
 
-import com.example.catalogpokemons.di.module.ApiModule
-import com.example.catalogpokemons.di.module.AppModule
-import com.example.catalogpokemons.di.module.CiceroneModule
-import com.example.catalogpokemons.di.module.RepoModule
+import com.example.catalogpokemons.di.module.*
 import com.example.catalogpokemons.presenter.MainActivityPresenter
 import com.example.catalogpokemons.presenter.PokemonPresenter
 import com.example.catalogpokemons.presenter.PokemonsPresenter
@@ -17,7 +14,8 @@ import javax.inject.Singleton
         ApiModule::class,
         AppModule::class,
         CiceroneModule::class,
-        RepoModule::class
+        RepoModule::class,
+        DatabaseModule::class
     ]
 )
 interface AppComponent {

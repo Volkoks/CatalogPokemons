@@ -35,6 +35,10 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
         }
     }
 
+    fun replaceToFavoritesPokemonsFragment(){
+        router.navigateTo(Screens.FavoritesPokemonsScreen())
+    }
+
     private fun loadData() {
         repository.getPokemons()
             .subscribe(
