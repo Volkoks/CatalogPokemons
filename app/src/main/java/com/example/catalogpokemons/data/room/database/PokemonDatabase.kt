@@ -7,7 +7,7 @@ import com.example.catalogpokemons.data.room.dao.RoomSpritesDao
 import com.example.catalogpokemons.data.room.entity.RoomPokemon
 import com.example.catalogpokemons.data.room.entity.RoomSprites
 
-@Database(entities = [RoomPokemon::class,RoomSprites::class],exportSchema = false, version = 1)
+@Database(entities = [RoomPokemon::class,RoomSprites::class],version = 1)
 abstract class PokemonDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "pokemon_db"

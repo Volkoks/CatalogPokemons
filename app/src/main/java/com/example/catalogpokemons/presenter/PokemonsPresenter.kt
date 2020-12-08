@@ -60,7 +60,6 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
                     viewState.snowError(error)
                 }
             )
-
     }
 
 

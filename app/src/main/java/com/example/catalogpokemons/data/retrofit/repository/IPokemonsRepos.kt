@@ -7,5 +7,4 @@ import io.reactivex.rxjava3.core.Single
 interface IPokemonsRepos {
     fun getPokemons(): Single<Root>
     fun getPokemon(url:String): Single<Pokemon>
-
 }

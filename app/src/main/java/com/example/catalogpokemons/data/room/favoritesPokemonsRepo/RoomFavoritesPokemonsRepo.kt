@@ -13,7 +13,7 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
     override fun addPokemon(pokemon: Pokemon?) = Single.fromCallable {
         pokemon?.let {
             val roomPokemon = RoomPokemon(
-                pokemon?.id ?: 0,
+                pokemon.id ?: 0,
                 pokemon.name ?: "",
                 pokemon.baseExperience ?: 0,
                 pokemon.height ?: 0,

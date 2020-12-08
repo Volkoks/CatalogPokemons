@@ -1,5 +1,6 @@
 package com.example.catalogpokemons.data.room.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -7,11 +8,18 @@ import androidx.room.PrimaryKey
 @Entity
 data class RoomPokemon(
     @PrimaryKey
+    @ColumnInfo
     val id: Int?,
+    @ColumnInfo
     val name: String?,
+    @ColumnInfo
     val baseExperience: Int?,
+    @ColumnInfo
     val height: Int?,
+    @ColumnInfo
     val isDefault: Boolean?,
+    @ColumnInfo
     val order: Int? ,
-    val weight: Int?,
+    @ColumnInfo
+    val weight: Int?
 )
