@@ -2,9 +2,9 @@ package com.example.catalogpokemons.di.module
 
 import androidx.room.Room
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.data.room.database.PokemonDatabase
-import com.example.catalogpokemons.data.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
-import com.example.catalogpokemons.data.room.favoritesPokemonsRepo.RoomFavoritesPokemonsRepo
+import com.example.catalogpokemons.mvp.model.room.database.PokemonDatabase
+import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
+import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.RoomFavoritesPokemonsRepo
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
