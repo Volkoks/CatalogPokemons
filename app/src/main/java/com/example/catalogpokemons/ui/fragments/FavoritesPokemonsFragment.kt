@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.catalogpokemons.R
-import com.example.catalogpokemons.view.FavoritesPokemonsView
+import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
 import moxy.MvpAppCompatFragment
 
 class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView {

@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catalogpokemons.R
-import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
-import com.example.catalogpokemons.view.image.IImageLoader
-import com.example.catalogpokemons.presenter.list.IPokemonListPresenter
-import com.example.catalogpokemons.view.PokemonItemView
+import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.mvp.view.image.IImageLoader
+import com.example.catalogpokemons.mvp.presenter.list.IPokemonListPresenter
+import com.example.catalogpokemons.mvp.view.PokemonItemView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.pokemon_card.view.*
 

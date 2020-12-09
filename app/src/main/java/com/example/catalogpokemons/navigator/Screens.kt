@@ -1,8 +1,7 @@
 package com.example.catalogpokemons.navigator
 
 
-import androidx.fragment.app.Fragment
-import com.example.catalogpokemons.data.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.ui.fragments.FavoritesPokemonsFragment
 import com.example.catalogpokemons.ui.fragments.PokemonFragment
 import com.example.catalogpokemons.ui.fragments.PokemonsFragment

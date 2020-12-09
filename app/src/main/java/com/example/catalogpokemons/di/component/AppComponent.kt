@@ -1,9 +1,9 @@
 package com.example.catalogpokemons.di.component
 
 import com.example.catalogpokemons.di.module.*
-import com.example.catalogpokemons.presenter.MainActivityPresenter
-import com.example.catalogpokemons.presenter.PokemonPresenter
-import com.example.catalogpokemons.presenter.PokemonsPresenter
+import com.example.catalogpokemons.mvp.presenter.MainActivityPresenter
+import com.example.catalogpokemons.mvp.presenter.PokemonPresenter
+import com.example.catalogpokemons.mvp.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton

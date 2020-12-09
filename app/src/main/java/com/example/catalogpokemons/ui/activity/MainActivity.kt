@@ -1,11 +1,10 @@
 package com.example.catalogpokemons.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.presenter.MainActivityPresenter
-import com.example.catalogpokemons.view.MainActivityView
+import com.example.catalogpokemons.mvp.presenter.MainActivityPresenter
+import com.example.catalogpokemons.mvp.view.MainActivityView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.terrakok.cicerone.NavigatorHolder

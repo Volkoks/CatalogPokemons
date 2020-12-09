@@ -1,7 +1,6 @@
 package com.example.catalogpokemons.di.module
 
-import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.data.retrofit.api.IPokemonDataSource
+import com.example.catalogpokemons.mvp.model.retrofit.api.IPokemonDataSource
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import dagger.Module

@@ -7,11 +7,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.data.APP_NAME
-import com.example.catalogpokemons.view.image.GlideImgLoader
-import com.example.catalogpokemons.presenter.PokemonsPresenter
+import com.example.catalogpokemons.mvp.model.APP_NAME
+import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
+import com.example.catalogpokemons.mvp.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
-import com.example.catalogpokemons.view.PokemonsView
+import com.example.catalogpokemons.mvp.view.PokemonsView
 import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
