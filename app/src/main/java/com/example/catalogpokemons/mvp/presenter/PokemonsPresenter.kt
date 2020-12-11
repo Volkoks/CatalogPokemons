@@ -66,4 +66,8 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
             pokemon.sprites?.front_default?.let { view.loadImg(it) }
         }
     }
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 }

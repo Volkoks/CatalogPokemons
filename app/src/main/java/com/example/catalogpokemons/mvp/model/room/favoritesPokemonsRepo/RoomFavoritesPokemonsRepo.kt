@@ -1,6 +1,7 @@
 package com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo
 
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Sprites
 import com.example.catalogpokemons.mvp.model.room.database.PokemonDatabase
 import com.example.catalogpokemons.mvp.model.room.entity.RoomPokemon
 import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
@@ -40,11 +41,32 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
     }.subscribeOn(Schedulers.io())
 
     override fun getAllPokemon() = Single.fromCallable {
-        db.pokemonDao.getAllPokemon()
+        db.pokemonDao.getAllPokemon().map { pokemon ->
+            Pokemon(
+                pokemon.id,
+                pokemon.name,
+                pokemon.baseExperience,
+                pokemon.height,
+                pokemon.isDefault,
+                pokemon.order,
+                pokemon.weight
+            )
+        }
     }.subscribeOn(Schedulers.io())
 
     override fun getAllSprites() = Single.fromCallable {
-        db.roomSpritesDao.getAllSprites()
+        db.roomSpritesDao.getAllSprites().map {
+            Sprites(
+                it.back_default,
+                it.back_female,
+                it.back_shiny,
+                it.back_shiny_female,
+                it.front_default,
+                it.front_female,
+                it.front_shiny,
+                it.front_shiny_female
+            )
+        }
     }.subscribeOn(Schedulers.io())
 
 

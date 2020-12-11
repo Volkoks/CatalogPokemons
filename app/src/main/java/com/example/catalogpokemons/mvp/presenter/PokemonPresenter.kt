@@ -5,6 +5,7 @@ import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavorit
 import com.example.catalogpokemons.mvp.view.PokemonView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
@@ -16,6 +17,8 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
     lateinit var favoritesPokemonRepo : IFavoritesPokemonsRepo
     @Inject
     lateinit var mainThread: Scheduler
+    @Inject
+    lateinit var router: Router
 
     var pokemon: Pokemon? = null
 
@@ -33,6 +36,9 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
             favoritesPokemonRepo.addPokemon(pokemon).observeOn(mainThread).subscribe()
         }
     }
-
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 
 }

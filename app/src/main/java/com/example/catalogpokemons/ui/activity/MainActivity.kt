@@ -5,6 +5,7 @@ import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
 import com.example.catalogpokemons.mvp.presenter.MainActivityPresenter
 import com.example.catalogpokemons.mvp.view.MainActivityView
+import com.example.catalogpokemons.ui.BackButtonListener
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.terrakok.cicerone.NavigatorHolder
@@ -38,5 +39,12 @@ class MainActivity : MvpAppCompatActivity(), MainActivityView {
     override fun onPause() {
         super.onPause()
         navigatorHolder.removeNavigator()
+    }
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.forEach {
+            if (it is BackButtonListener && it.backPressed()) {
+                return
+            }
+        }
     }
 }

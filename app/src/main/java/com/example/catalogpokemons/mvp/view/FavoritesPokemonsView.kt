@@ -6,4 +6,7 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface FavoritesPokemonsView:MvpView {
+    fun init()
+    fun update()
+    fun error(e: String?)
 }

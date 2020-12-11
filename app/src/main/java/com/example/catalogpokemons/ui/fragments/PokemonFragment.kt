@@ -12,6 +12,7 @@ import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
 import com.example.catalogpokemons.mvp.view.image.IImageLoader
 import com.example.catalogpokemons.mvp.presenter.PokemonPresenter
 import com.example.catalogpokemons.mvp.view.PokemonView
+import com.example.catalogpokemons.ui.BackButtonListener
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -20,7 +21,7 @@ import moxy.ktx.moxyPresenter
  * Фрагмент экрана Покемона(Здесь осуществляется отображение всех данных для одного покемона)
  */
 class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFragment(),
-    PokemonView {
+    PokemonView, BackButtonListener {
 
     companion object {
         fun newInstance(pokemon: Pokemon) = PokemonFragment(GlideImgLoader()).apply {
@@ -72,4 +73,6 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
     override fun loadImage(url: String) {
         imageLoader.imageLoad(url, image_pokemon_iv)
     }
+
+    override fun backPressed() = presenter.backPressed()
 }

@@ -12,6 +12,7 @@ import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
 import com.example.catalogpokemons.mvp.presenter.PokemonsPresenter
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import com.example.catalogpokemons.mvp.view.PokemonsView
+import com.example.catalogpokemons.ui.BackButtonListener
 import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -19,7 +20,7 @@ import moxy.ktx.moxyPresenter
 /**
  * Фрагмент эрана с листом Покемонов
  */
-class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
+class PokemonsFragment : MvpAppCompatFragment(), PokemonsView, BackButtonListener {
     companion object {
         fun newInstance() = PokemonsFragment()
     }
@@ -42,13 +43,13 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_pokemons_fragment,menu)
+        inflater.inflate(R.menu.menu_pokemons_fragment, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.favotites_item_menu->{
+        when (item.itemId) {
+            R.id.favotites_item_menu -> {
                 presenter.replaceToFavoritesPokemonsFragment()
             }
         }
@@ -74,4 +75,6 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView {
         super.onResume()
         activity?.title = APP_NAME
     }
+
+    override fun backPressed() = presenter.backPressed()
 }
