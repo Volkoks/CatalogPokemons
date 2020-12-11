@@ -41,19 +41,11 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         }, {
             viewState.error(it.message)
         })
-        favoritesPokemonRepo.getAllSprites().observeOn(mainThread).subscribe({
-            listFPListPresenter.sprites.clear()
-            listFPListPresenter.sprites.addAll(it)
-            viewState.update()
-        }, {
-            viewState.error(it.message)
-        })
     }
 
     inner class FavoritesPokemonListPresenter : IPokemonListPresenter {
 
         val pokemons = mutableListOf<Pokemon>()
-        val sprites = mutableListOf<Sprites>()
 
         override var itemClickListener: ((PokemonItemView) -> Unit)? = null
 
@@ -62,9 +54,8 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         override fun bind(view: PokemonItemView) {
             val pokemon = pokemons[view.pos]
             view.bind(pokemon)
+            pokemon.sprites?.front_default?.let { view.loadImg(it) }
 
-            val sprites = sprites[view.pos]
-            sprites.front_default?.let { view.loadImg(it) }
         }
 
     }

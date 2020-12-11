@@ -7,5 +7,5 @@ import io.reactivex.rxjava3.core.Single
 interface IFavoritesPokemonsRepo {
     fun addPokemon(pokemon:Pokemon?):Single<Pokemon?>
     fun getAllPokemon():Single<List<Pokemon>>
-    fun getAllSprites():Single<List<Sprites>>
+    fun getSpritesForById(pokemonId: Int):Single<Sprites>
 }

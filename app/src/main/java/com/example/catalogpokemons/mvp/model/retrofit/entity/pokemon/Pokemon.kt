@@ -1,6 +1,7 @@
 package com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon
 
 import android.os.Parcelable
+import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
