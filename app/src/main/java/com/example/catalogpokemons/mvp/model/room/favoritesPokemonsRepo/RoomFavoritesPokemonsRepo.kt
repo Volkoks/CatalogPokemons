@@ -24,16 +24,17 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
             )
             db.pokemonDao.insertPokemon(roomPokemon)
         }
-        pokemon?.sprites?.let { pokemon ->
+        pokemon?.let { pokemon ->
             val roomSprites = RoomSprites(
-                back_default = pokemon.back_default,
-                back_female = pokemon.back_female,
-                back_shiny = pokemon.back_shiny,
-                back_shiny_female = pokemon.back_shiny_female,
-                front_default = pokemon.front_default,
-                front_female = pokemon.front_female,
-                front_shiny = pokemon.front_shiny,
-                front_shiny_female = pokemon.front_shiny_female
+                back_default = pokemon.sprites?.back_default,
+                back_female = pokemon.sprites?.back_female,
+                back_shiny = pokemon.sprites?.back_shiny,
+                back_shiny_female = pokemon.sprites?.back_shiny_female,
+                front_default = pokemon.sprites?.front_default,
+                front_female = pokemon.sprites?.front_female,
+                front_shiny = pokemon.sprites?.front_shiny,
+                front_shiny_female = pokemon.sprites?.front_shiny_female,
+                pokemonId = pokemon.id
             )
             db.roomSpritesDao.insertSprites(roomSprites)
         }
@@ -49,25 +50,25 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
                 pokemon.height,
                 pokemon.isDefault,
                 pokemon.order,
-                pokemon.weight
+                pokemon.weight,
+                pokemon.id?.let { getSpritesForById(it).blockingGet() }
             )
         }
     }.subscribeOn(Schedulers.io())
 
-    override fun getAllSprites() = Single.fromCallable {
-        db.roomSpritesDao.getAllSprites().map {
-            Sprites(
-                it.back_default,
-                it.back_female,
-                it.back_shiny,
-                it.back_shiny_female,
-                it.front_default,
-                it.front_female,
-                it.front_shiny,
-                it.front_shiny_female
-            )
-        }
-    }.subscribeOn(Schedulers.io())
+    override fun getSpritesForById(pokemonId: Int): Single<Sprites> = Single.fromCallable{
+        val roomSprites = db.roomSpritesDao.getById(pokemonId)
+        Sprites(
+            roomSprites.back_default,
+            roomSprites.back_female,
+            roomSprites.back_shiny,
+            roomSprites.back_shiny_female,
+            roomSprites.front_default,
+            roomSprites.front_female,
+            roomSprites.front_shiny,
+            roomSprites.front_shiny_female
+        )
+    }
 
 
 }

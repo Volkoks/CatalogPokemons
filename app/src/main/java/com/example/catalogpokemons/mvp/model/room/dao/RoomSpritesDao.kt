@@ -2,6 +2,7 @@ package com.example.catalogpokemons.mvp.model.room.dao
 
 import androidx.room.*
 import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface RoomSpritesDao {
@@ -12,7 +13,7 @@ interface RoomSpritesDao {
     fun insertSprites(vararg roomSprites: RoomSprites)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSprites(listSprites:List<RoomSprites>)
+    fun insertSprites(listSprites: List<RoomSprites>)
 
     @Update
     fun updateSprites(roomSprites: RoomSprites)
@@ -34,4 +35,7 @@ interface RoomSpritesDao {
 
     @Query("SELECT * FROM RoomSprites")
     fun getAllSprites(): List<RoomSprites>
+
+    @Query("SELECT * FROM RoomSprites WHERE pokemonId = :pokemonId")
+    fun getById(pokemonId: Int): RoomSprites
 }

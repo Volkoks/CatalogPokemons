@@ -1,6 +1,7 @@
 package com.example.catalogpokemons.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
 
     override fun error(e: String?) {
         Toast.makeText(context, "Ошибка: ${e}", Toast.LENGTH_SHORT).show()
+        e?.let { Log.d("ОШИБКА ROOM", it) }
     }
 
     override fun backPressed() = presenter.backPressed()
