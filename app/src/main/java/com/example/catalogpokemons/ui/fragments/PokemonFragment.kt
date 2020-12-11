@@ -2,18 +2,17 @@ package com.example.catalogpokemons.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import com.example.catalogpokemons.R
-import com.example.catalogpokemons.data.POKEMON
-import com.example.catalogpokemons.data.retrofit.entity.Results
-import com.example.catalogpokemons.data.retrofit.entity.Pokemon
-import com.example.catalogpokemons.data.retrofit.loader.GlideImgLoader
-import com.example.catalogpokemons.data.retrofit.loader.IImageLoader
-import com.example.catalogpokemons.presenter.PokemonPresenter
-import com.example.catalogpokemons.view.PokemonView
+import com.example.catalogpokemons.app.PokemonApp
+import com.example.catalogpokemons.mvp.model.POKEMON
+import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
+import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
+import com.example.catalogpokemons.mvp.view.image.IImageLoader
+import com.example.catalogpokemons.mvp.presenter.PokemonPresenter
+import com.example.catalogpokemons.mvp.view.PokemonView
+import com.example.catalogpokemons.ui.BackButtonListener
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -22,20 +21,21 @@ import moxy.ktx.moxyPresenter
  * Фрагмент экрана Покемона(Здесь осуществляется отображение всех данных для одного покемона)
  */
 class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFragment(),
-    PokemonView {
+    PokemonView, BackButtonListener {
 
     companion object {
-        fun newInstance(pokemon: Pokemon): PokemonFragment {
-            val fragment = PokemonFragment(GlideImgLoader())
-            val bundle = Bundle()
-            bundle.putParcelable(POKEMON, pokemon)
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(pokemon: Pokemon) = PokemonFragment(GlideImgLoader()).apply {
+            arguments = Bundle().apply {
+                putParcelable(POKEMON, pokemon)
+            }
         }
     }
 
+
     private val presenter: PokemonPresenter by moxyPresenter {
-        PokemonPresenter()
+        PokemonPresenter().apply {
+            PokemonApp.instance.appComponent.inject(this)
+        }
     }
 
 
@@ -43,15 +43,22 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val v = View.inflate(context, R.layout.fragment_pokemon, null)
         presenter.pokemon = arguments?.getParcelable(POKEMON)
         return v
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_pokemon_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_to_favorites -> presenter.addPokemonInFavorites()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @SuppressLint("SetTextI18n")
@@ -66,4 +73,6 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
     override fun loadImage(url: String) {
         imageLoader.imageLoad(url, image_pokemon_iv)
     }
+
+    override fun backPressed() = presenter.backPressed()
 }
