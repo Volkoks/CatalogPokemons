@@ -36,6 +36,6 @@ interface RoomSpritesDao {
     @Query("SELECT * FROM RoomSprites")
     fun getAllSprites(): List<RoomSprites>
 
-    @Query("SELECT * FROM RoomSprites WHERE pokemonId = :pokemonId")
+    @Query("SELECT * FROM RoomSprites WHERE pokemonId = :pokemonId LIMIT 1")
     fun getById(pokemonId: Int): RoomSprites
 }
