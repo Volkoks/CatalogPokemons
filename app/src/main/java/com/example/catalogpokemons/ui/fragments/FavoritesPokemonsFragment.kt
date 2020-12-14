@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
+import com.example.catalogpokemons.mvp.model.APP_NAME
 import com.example.catalogpokemons.mvp.presenter.FavoritesPokemonsPresenter
 import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
 import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
@@ -64,6 +65,7 @@ class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
     override fun backPressed() = presenter.backPressed()
 
     override fun onResume() {
+        activity?.title = APP_NAME
         presenter.loadFavoritesPokemon()
         super.onResume()
     }
