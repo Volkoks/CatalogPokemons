@@ -2,7 +2,6 @@ package com.example.catalogpokemons.mvp.presenter
 
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
-import com.example.catalogpokemons.mvp.view.FavoritPokemonView
 import com.example.catalogpokemons.mvp.view.PokemonView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -40,11 +39,12 @@ class FavoritPokemonPresenter : MvpPresenter<PokemonView>() {
      */
     fun deletePokemonFromFavorites() {
         pokemon?.let {
-            favoritesPokemonRepo.deletePOkemon(it).observeOn(mainThread).subscribe()
-            backPressed()
+            favoritesPokemonRepo.deletePokemon(it).observeOn(mainThread).subscribe()
         }
     }
+
     fun backPressed(): Boolean {
+        loadFovaritesPokemon()
         router.exit()
         return true
     }

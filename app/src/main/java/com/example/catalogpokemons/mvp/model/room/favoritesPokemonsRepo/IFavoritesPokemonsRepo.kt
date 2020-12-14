@@ -11,5 +11,5 @@ interface IFavoritesPokemonsRepo {
     fun addPokemon(pokemon:Pokemon?):Single<Pokemon?>
     fun getAllPokemon():Single<List<Pokemon>>
     fun getSpritesForById(pokemonId: Int):Single<Sprites>
-    fun deletePOkemon(pokemon: Pokemon):Single<Pokemon>
+    fun deletePokemon(pokemon: Pokemon):Single<Pokemon>
 }
