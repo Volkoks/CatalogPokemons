@@ -73,7 +73,7 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
         )
     }
 
-    override fun deletePOkemon(pokemon: Pokemon) = Single.fromCallable{
+    override fun deletePokemon(pokemon: Pokemon) = Single.fromCallable{
         val roomPokemon = pokemon.id?.let { db.pokemonDao.getRoomPokemonById(it) }
         roomPokemon?.let { db.pokemonDao.deletePokemon(it) }
         pokemon

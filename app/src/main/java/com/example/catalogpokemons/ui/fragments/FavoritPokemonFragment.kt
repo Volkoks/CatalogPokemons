@@ -44,18 +44,22 @@ class FavoritPokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppC
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         presenter.pokemon = arguments?.getParcelable(POKEMON)
         return View.inflate(context, R.layout.fragment_favorit_pokemon, null)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(MENU_FAVORIT_POKEMON, menu)
+        inflater.inflate(R.menu.menu_favorit_pokemon, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.add_to_favorites -> presenter.deletePokemonFromFavorites()
+            R.id.delete_from_favorites -> {
+                presenter.deletePokemonFromFavorites()
+                backPressed()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
