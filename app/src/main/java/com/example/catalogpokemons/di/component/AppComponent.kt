@@ -7,6 +7,9 @@ import com.example.catalogpokemons.ui.fragments.FavoritesPokemonsFragment
 import dagger.Component
 import javax.inject.Singleton
 
+/**
+ * Компонент для внедрения зависимостей через DI
+ */
 @Singleton
 @Component(
     modules = [

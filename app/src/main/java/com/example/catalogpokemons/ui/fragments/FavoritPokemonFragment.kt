@@ -20,6 +20,9 @@ import kotlinx.android.synthetic.main.fragment_pokemon.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
+/**
+ * Фрагмент экрана Избранного Покемона
+ */
 class FavoritPokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFragment(),
     PokemonView, BackButtonListener {
     companion object {

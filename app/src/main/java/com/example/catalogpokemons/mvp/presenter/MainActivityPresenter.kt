@@ -6,6 +6,9 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+/**
+ * Презентер Активити
+ */
 class MainActivityPresenter() : MvpPresenter<MainActivityView>() {
 
     @Inject
@@ -16,7 +19,4 @@ class MainActivityPresenter() : MvpPresenter<MainActivityView>() {
         router.replaceScreen(Screens.PokemonsScreen())
     }
 
-    fun backClicked() {
-        router.exit()
-    }
 }

@@ -9,6 +9,9 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+/**
+ * Презентер для фрагмента FavoritPokemonPresenter
+ */
 class FavoritPokemonPresenter : MvpPresenter<PokemonView>() {
 
     @Inject
@@ -32,6 +35,9 @@ class FavoritPokemonPresenter : MvpPresenter<PokemonView>() {
         pokemon?.sprites?.front_default?.let { viewState.loadImage(it) }
     }
 
+    /**
+     * Функция удаления из БД Избранных покемонов
+     */
     fun deletePokemonFromFavorites() {
         pokemon?.let {
             favoritesPokemonRepo.deletePOkemon(it).observeOn(mainThread).subscribe()

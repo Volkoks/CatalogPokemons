@@ -47,6 +47,9 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         })
     }
 
+    /**
+     * Презентер для каждой карточки покемона в RV.
+     */
     inner class FavoritesPokemonListPresenter : IPokemonListPresenter {
 
         val pokemons = mutableListOf<Pokemon>()

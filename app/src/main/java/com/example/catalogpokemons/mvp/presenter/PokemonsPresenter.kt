@@ -12,6 +12,9 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+/**
+ * Презентер фрагмента PokemonsFragment
+ */
 class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
     @Inject
     lateinit var mainThread: Scheduler
