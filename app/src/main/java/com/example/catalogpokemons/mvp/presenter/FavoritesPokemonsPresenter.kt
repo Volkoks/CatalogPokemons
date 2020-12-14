@@ -6,11 +6,15 @@ import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavorit
 import com.example.catalogpokemons.mvp.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
 import com.example.catalogpokemons.mvp.view.PokemonItemView
+import com.example.catalogpokemons.navigator.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+/**
+ * Презентер для фрагмента Избранных покемонов( FavoritesPokemonsFragment)
+ */
 class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
 
     @Inject
@@ -29,11 +33,11 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         viewState.init()
         loadFavoritesPokemon()
         listFPListPresenter.itemClickListener = {
-
+            router.navigateTo(Screens.FavoritePokemon(listFPListPresenter.pokemons[it.pos]))
         }
     }
 
-    private fun loadFavoritesPokemon() {
+    fun loadFavoritesPokemon() {
         favoritesPokemonRepo.getAllPokemon().observeOn(mainThread).subscribe({
             listFPListPresenter.pokemons.clear()
             listFPListPresenter.pokemons.addAll(it)
@@ -43,6 +47,9 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         })
     }
 
+    /**
+     * Презентер для каждой карточки покемона в RV.
+     */
     inner class FavoritesPokemonListPresenter : IPokemonListPresenter {
 
         val pokemons = mutableListOf<Pokemon>()
@@ -55,13 +62,12 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
             val pokemon = pokemons[view.pos]
             view.bind(pokemon)
             pokemon.sprites?.front_default?.let { view.loadImg(it) }
-
         }
-
     }
 
     fun backPressed(): Boolean {
         router.exit()
         return true
     }
+
 }

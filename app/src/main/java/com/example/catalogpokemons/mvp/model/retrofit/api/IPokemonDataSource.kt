@@ -6,8 +6,11 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Url
 
+/**
+ * Интерфейс для работы с ретрофит(функции получения покемонов)
+ */
 interface IPokemonDataSource {
-    @GET("pokemon/?limit=50")
+    @GET("pokemon/?limit=155")
     fun getPokemons(): Single<Root>
 
     @GET

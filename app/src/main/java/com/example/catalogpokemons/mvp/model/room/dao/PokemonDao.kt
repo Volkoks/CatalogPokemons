@@ -34,4 +34,7 @@ interface PokemonDao {
 
     @Query("SELECT * FROM RoomPokemon")
     fun getAllPokemon(): List<RoomPokemon>
+
+    @Query("SELECT * FROM RoomPokemon WHERE id = :id LIMIT 1")
+    fun getRoomPokemonById(id: Int): RoomPokemon
 }
