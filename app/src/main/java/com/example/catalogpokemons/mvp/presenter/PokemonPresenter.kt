@@ -14,9 +14,11 @@ import javax.inject.Inject
 class PokemonPresenter() : MvpPresenter<PokemonView>() {
 
     @Inject
-    lateinit var favoritesPokemonRepo : IFavoritesPokemonsRepo
+    lateinit var favoritesPokemonRepo: IFavoritesPokemonsRepo
+
     @Inject
     lateinit var mainThread: Scheduler
+
     @Inject
     lateinit var router: Router
 
@@ -31,11 +33,21 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
         }
     }
 
-    fun addPokemonInFavorites(){
+    fun addPokemonInFavorites() {
         pokemon?.let {
             favoritesPokemonRepo.addPokemon(pokemon).observeOn(mainThread).subscribe()
         }
     }
+
+    fun deletePokemonFromFavorites() {
+        pokemon?.let {
+            favoritesPokemonRepo.deletePOkemon(it).observeOn(mainThread).subscribe()
+            backPressed()
+        }
+
+
+    }
+
     fun backPressed(): Boolean {
         router.exit()
         return true

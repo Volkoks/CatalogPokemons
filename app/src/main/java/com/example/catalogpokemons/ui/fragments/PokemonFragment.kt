@@ -18,15 +18,16 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 /**
- * Фрагмент экрана Покемона(Здесь осуществляется отображение всех данных для одного покемона)
+ * Фрагмент экрана Покемона(Здесь осуществляется отображение всех данных для одного покемона полученного из сети)
  */
 class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFragment(),
     PokemonView, BackButtonListener {
 
     companion object {
-        fun newInstance(pokemon: Pokemon) = PokemonFragment(GlideImgLoader()).apply {
+        fun newInstance(pokemon: Pokemon, idMenu:Int) = PokemonFragment(GlideImgLoader()).apply {
             arguments = Bundle().apply {
                 putParcelable(POKEMON, pokemon)
+                putInt("idMenu", idMenu)
             }
         }
     }
@@ -50,13 +51,14 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_pokemon_fragment, menu)
+        arguments?.getInt("idMenu")?.let { inflater.inflate(it, menu) }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_to_favorites -> presenter.addPokemonInFavorites()
+            R.id.delete_from_favorites-> presenter.deletePokemonFromFavorites()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -64,14 +66,14 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
     @SuppressLint("SetTextI18n")
     override fun init(pokemon: Pokemon) {
         activity?.title = pokemon.name
-        base_experience_tv.text = "Базовый опыт: ${pokemon.baseExperience.toString()}"
-        height_tv.text = "Рост: ${pokemon.height.toString()}"
-        weight_tv.text = "Вес: ${pokemon.weight}"
+        base_experience_favorit_pokemon_tv.text = "Базовый опыт: ${pokemon.baseExperience.toString()}"
+        height_favorit_pokemon_tv.text = "Рост: ${pokemon.height.toString()}"
+        weight_favorit_pokemon_tv.text = "Вес: ${pokemon.weight}"
 
     }
 
     override fun loadImage(url: String) {
-        imageLoader.imageLoad(url, image_pokemon_iv)
+        imageLoader.imageLoad(url, image_favorit_pokemon_iv)
     }
 
     override fun backPressed() = presenter.backPressed()

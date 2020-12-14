@@ -1,6 +1,9 @@
 package com.example.catalogpokemons.navigator
 
 
+
+import com.example.catalogpokemons.mvp.model.MENU_FAVORIT_POKEMON
+import com.example.catalogpokemons.mvp.model.MENU_POKEMON
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.ui.fragments.FavoritesPokemonsFragment
 import com.example.catalogpokemons.ui.fragments.PokemonFragment
@@ -13,7 +16,10 @@ class Screens {
     }
 
     class PokemonScreen(val pokemon: Pokemon) : SupportAppScreen() {
-        override fun getFragment() = PokemonFragment.newInstance(pokemon)
+        override fun getFragment() = PokemonFragment.newInstance(pokemon, MENU_POKEMON)
+    }
+    class FavoritePokemon(val pokemon: Pokemon):SupportAppScreen(){
+        override fun getFragment() = PokemonFragment.newInstance(pokemon, MENU_FAVORIT_POKEMON)
     }
 
     class FavoritesPokemonsScreen() : SupportAppScreen() {

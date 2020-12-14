@@ -18,7 +18,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 /**
- * Фрагмент эрана с листом Покемонов
+ * Фрагмент эрана с листом Покемонов(здесь отображается список покемонов полученных из сети)
  */
 class PokemonsFragment : MvpAppCompatFragment(), PokemonsView, BackButtonListener {
     companion object {

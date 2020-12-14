@@ -8,6 +8,9 @@ import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+/**
+ * Репозиторий для Избранных покемонов(добавление в избранное/получение избранных покемонов)
+ */
 class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRepo {
 
 
@@ -56,7 +59,7 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
         }
     }.subscribeOn(Schedulers.io())
 
-    override fun getSpritesForById(pokemonId: Int): Single<Sprites> = Single.fromCallable{
+    override fun getSpritesForById(pokemonId: Int): Single<Sprites> = Single.fromCallable {
         val roomSprites = db.roomSpritesDao.getById(pokemonId)
         Sprites(
             roomSprites.back_default,
@@ -69,6 +72,12 @@ class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRep
             roomSprites.front_shiny_female
         )
     }
+
+    override fun deletePOkemon(pokemon: Pokemon) = Single.fromCallable{
+        val roomPokemon = pokemon.id?.let { db.pokemonDao.getRoomPokemonById(it) }
+        roomPokemon?.let { db.pokemonDao.deletePokemon(it) }
+        pokemon
+    }.subscribeOn(Schedulers.io())
 
 
 }

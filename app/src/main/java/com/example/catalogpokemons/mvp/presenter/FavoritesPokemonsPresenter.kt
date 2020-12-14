@@ -6,11 +6,15 @@ import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavorit
 import com.example.catalogpokemons.mvp.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
 import com.example.catalogpokemons.mvp.view.PokemonItemView
+import com.example.catalogpokemons.navigator.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+/**
+ * Презентер для фрагмента Избранных покемонов( FavoritesPokemonsFragment)
+ */
 class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
 
     @Inject
@@ -29,11 +33,12 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         viewState.init()
         loadFavoritesPokemon()
         listFPListPresenter.itemClickListener = {
-
+            val pokemon = listFPListPresenter.pokemons[it.pos]
+            router.navigateTo(Screens.FavoritePokemon(pokemon))
         }
     }
 
-    private fun loadFavoritesPokemon() {
+    fun loadFavoritesPokemon() {
         favoritesPokemonRepo.getAllPokemon().observeOn(mainThread).subscribe({
             listFPListPresenter.pokemons.clear()
             listFPListPresenter.pokemons.addAll(it)
@@ -64,4 +69,5 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         router.exit()
         return true
     }
+
 }

@@ -19,6 +19,10 @@ import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
+/**
+ * Фрагмент экрана Избранных покемонов(на данном фрагменте выводится список покемонов добавленных в
+ * избранное
+ */
 class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
     BackButtonListener {
 
@@ -58,4 +62,9 @@ class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
     }
 
     override fun backPressed() = presenter.backPressed()
+
+    override fun onResume() {
+        presenter.loadFavoritesPokemon()
+        super.onResume()
+    }
 }
