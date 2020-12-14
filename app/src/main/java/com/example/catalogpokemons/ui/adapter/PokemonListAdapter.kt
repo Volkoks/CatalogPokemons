@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catalogpokemons.R
+import com.example.catalogpokemons.mvp.model.retrofit.entity.Results
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.mvp.view.image.IImageLoader
 import com.example.catalogpokemons.mvp.presenter.list.IPokemonListPresenter
@@ -40,9 +41,13 @@ class PokemonListAdapter(
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer, PokemonItemView {
 
+        override fun initName(result: Results) = with(containerView) {
+            pokemon_name_tv_card.text = result.name
+        }
+
         override fun bind(pokemon: Pokemon) = with(containerView) {
-            pokemon_id_tv_card.text = pokemon.id.toString()
             pokemon_name_tv_card.text = pokemon.name
+            pokemon_id_tv_card.text = pokemon.id.toString()
             base_experience_tv_card.text = pokemon.baseExperience.toString()
         }
 

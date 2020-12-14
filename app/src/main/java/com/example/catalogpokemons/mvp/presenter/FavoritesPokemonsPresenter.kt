@@ -33,8 +33,7 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
         viewState.init()
         loadFavoritesPokemon()
         listFPListPresenter.itemClickListener = {
-            val pokemon = listFPListPresenter.pokemons[it.pos]
-            router.navigateTo(Screens.FavoritePokemon(pokemon))
+            router.navigateTo(Screens.FavoritePokemon(listFPListPresenter.pokemons[it.pos]))
         }
     }
 
@@ -60,9 +59,7 @@ class FavoritesPokemonsPresenter : MvpPresenter<FavoritesPokemonsView>() {
             val pokemon = pokemons[view.pos]
             view.bind(pokemon)
             pokemon.sprites?.front_default?.let { view.loadImg(it) }
-
         }
-
     }
 
     fun backPressed(): Boolean {

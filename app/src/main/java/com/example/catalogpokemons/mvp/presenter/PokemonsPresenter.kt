@@ -29,8 +29,7 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
         viewState.init()
         loadData()
         listPresenter.itemClickListener = {
-            val pokemon = listPresenter.pokemons[it.pos]
-            router.navigateTo(Screens.PokemonScreen(pokemon))
+            router.navigateTo(Screens.PokemonScreen(listPresenter.results[it.pos]))
         }
     }
 
@@ -39,33 +38,37 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
     }
 
     private fun loadData() {
-        repository.getListPokemon().observeOn(mainThread).subscribe({
-            listPresenter.pokemons.clear()
-            listPresenter.pokemons.addAll(it as List<Pokemon>)
-            listPresenter.pokemons.sortBy { it.id }
+        repository.getRoot().observeOn(mainThread).subscribe({
+            listPresenter.results.clear()
+            it.results?.let { it1 -> listPresenter.results.addAll(it1) }
             viewState.updateList()
         }, {
             viewState.snowError(it)
-
         })
     }
 
 
     inner class PokemonListPresenter() :
         IPokemonListPresenter {
-
-        var pokemons = mutableListOf<Pokemon>()
+        val results = mutableListOf<Results>()
         override var itemClickListener: ((PokemonItemView) -> Unit)? = null
 
 
-        override fun getCount() = pokemons.size
+        override fun getCount() = results.size
 
         override fun bind(view: PokemonItemView) {
-            val pokemon = pokemons[view.pos]
-            view.bind(pokemon)
-            pokemon.sprites?.front_default?.let { view.loadImg(it) }
+            val result = results[view.pos]
+            view.initName(result)
+            repository.getPokemon(result.url.toString()).observeOn(mainThread)
+                .subscribe({ pokemon ->
+                    view.bind(pokemon)
+                    pokemon.sprites?.front_default?.let { view.loadImg(it) }
+                }, {
+                    viewState.snowError(it)
+                })
         }
     }
+
     fun backPressed(): Boolean {
         router.exit()
         return true

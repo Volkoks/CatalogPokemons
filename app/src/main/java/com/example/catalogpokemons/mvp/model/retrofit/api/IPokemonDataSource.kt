@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface IPokemonDataSource {
-    @GET("pokemon/?limit=50")
+    @GET("pokemon/?limit=155")
     fun getPokemons(): Single<Root>
 
     @GET
