@@ -9,4 +9,5 @@ interface FavoritesPokemonsView:MvpView {
     fun init()
     fun update()
     fun error(e: String?)
+    fun finish()
 }

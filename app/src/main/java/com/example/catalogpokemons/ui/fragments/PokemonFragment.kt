@@ -6,15 +6,15 @@ import android.view.*
 import android.widget.ImageView
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.mvp.model.MENU_FAVORIT_POKEMON
+import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
 import com.example.catalogpokemons.mvp.model.MENU_POKEMON
 import com.example.catalogpokemons.mvp.model.POKEMON
 import com.example.catalogpokemons.mvp.model.retrofit.entity.Results
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
-import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
-import com.example.catalogpokemons.mvp.view.image.IImageLoader
 import com.example.catalogpokemons.mvp.presenter.PokemonPresenter
 import com.example.catalogpokemons.mvp.view.PokemonView
+import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
+import com.example.catalogpokemons.mvp.view.image.IImageLoader
 import com.example.catalogpokemons.ui.BackButtonListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_pokemon.*
@@ -36,9 +36,12 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
 
     }
 
+    var favoritesSubcomponent: FavoritesPokemonsSubcomponent? = null
+
     private val presenter: PokemonPresenter by moxyPresenter {
+        favoritesSubcomponent = PokemonApp.instance.initFavoritesSubcomponent()
         PokemonPresenter().apply {
-            PokemonApp.instance.appComponent.inject(this)
+            favoritesSubcomponent?.inject(this)
         }
     }
 
@@ -80,6 +83,11 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
 
     override fun showError(e: Throwable) {
         view?.let { e.message?.let { it1 -> Snackbar.make(it, it1, Snackbar.LENGTH_SHORT).show() } }
+    }
+
+    override fun finish() {
+        favoritesSubcomponent = null
+        PokemonApp.instance.finishFavoritesSubcomponent()
     }
 
     override fun backPressed() = presenter.backPressed()

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
+import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
 import com.example.catalogpokemons.mvp.model.APP_NAME
 import com.example.catalogpokemons.mvp.presenter.FavoritesPokemonsPresenter
 import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
@@ -16,7 +17,6 @@ import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
 import com.example.catalogpokemons.ui.BackButtonListener
 import com.example.catalogpokemons.ui.adapter.PokemonListAdapter
 import kotlinx.android.synthetic.main.fragment_favorites_pokemons.*
-import kotlinx.android.synthetic.main.fragment_pokemons.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -32,9 +32,12 @@ class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
         fun newInstance() = FavoritesPokemonsFragment()
     }
 
+    var favoritesSubcomponent: FavoritesPokemonsSubcomponent? = null
+
     val presenter: FavoritesPokemonsPresenter by moxyPresenter {
+        favoritesSubcomponent = PokemonApp.instance.initFavoritesSubcomponent()
         FavoritesPokemonsPresenter().apply {
-            PokemonApp.instance.appComponent.inject(this)
+            favoritesSubcomponent?.inject(this)
         }
     }
     private var adapter: PokemonListAdapter? = null
@@ -60,6 +63,11 @@ class FavoritesPokemonsFragment : MvpAppCompatFragment(), FavoritesPokemonsView,
     override fun error(e: String?) {
         Toast.makeText(context, "Ошибка: ${e}", Toast.LENGTH_SHORT).show()
         e?.let { Log.d("ОШИБКА ROOM", it) }
+    }
+
+    override fun finish() {
+        favoritesSubcomponent = null
+        PokemonApp.instance.finishFavoritesSubcomponent()
     }
 
     override fun backPressed() = presenter.backPressed()
