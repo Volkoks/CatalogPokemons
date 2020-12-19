@@ -3,7 +3,7 @@ package com.example.catalogpokemons.mvp.presenter
 import com.example.catalogpokemons.mvp.model.retrofit.entity.Results
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.mvp.model.retrofit.repository.IPokemonsRepos
-import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
+import com.example.catalogpokemons.mvp.model.room.repositories.favorites.IFavoritesPokemonsRepo
 import com.example.catalogpokemons.mvp.view.PokemonView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -56,6 +56,11 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
     fun backPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.finish()
     }
 
 }
