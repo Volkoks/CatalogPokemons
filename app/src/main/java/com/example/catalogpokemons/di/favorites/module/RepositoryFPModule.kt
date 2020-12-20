@@ -9,7 +9,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RepositoryModule {
+class RepositoryFPModule {
 
     @FavoritesPokemonsScope
     @Provides

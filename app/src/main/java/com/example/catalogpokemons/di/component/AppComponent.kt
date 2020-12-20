@@ -1,15 +1,18 @@
 package com.example.catalogpokemons.di.component
 
 import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
-import com.example.catalogpokemons.di.module.*
-import com.example.catalogpokemons.mvp.presenter.*
+import com.example.catalogpokemons.di.module.ApiModule
+import com.example.catalogpokemons.di.module.AppModule
+import com.example.catalogpokemons.di.module.CiceroneModule
+import com.example.catalogpokemons.di.module.DatabaseModule
+import com.example.catalogpokemons.di.pokemons.PokemonsSubcomponent
+import com.example.catalogpokemons.mvp.presenter.MainActivityPresenter
 import com.example.catalogpokemons.ui.activity.MainActivity
-import com.example.catalogpokemons.ui.fragments.FavoritesPokemonsFragment
 import dagger.Component
 import javax.inject.Singleton
 
 /**
- * Компонент для внедрения зависимостей через DI
+ * Компонент для внедрения зависимостей через DI(основной компонент для всего приложения)
  */
 @Singleton
 @Component(
@@ -17,18 +20,13 @@ import javax.inject.Singleton
         ApiModule::class,
         AppModule::class,
         CiceroneModule::class,
-        RepoModule::class,
         DatabaseModule::class
     ]
 )
 interface AppComponent {
-
     fun favoritesPokemonsSubcomponent(): FavoritesPokemonsSubcomponent
+    fun pokemonsSubcomponent(): PokemonsSubcomponent
 
     fun inject(mainActivity: MainActivity)
     fun inject(mainActivityPresenter: MainActivityPresenter)
-    fun inject(pokemonsPresenter: PokemonsPresenter)
-    //    fun inject(pokemonPresenter: PokemonPresenter)
-//    fun inject(favoritesPokemonsPresenter: FavoritesPokemonsPresenter)
-//    fun inject(favoritPokemonPresenter: FavoritPokemonPresenter)
 }

@@ -17,9 +17,4 @@ class DatabaseModule {
     fun favoritsPokemonsDatabase(app: PokemonApp): FavoritsPokemonsDatabase = Room.databaseBuilder(
         app, FavoritsPokemonsDatabase::class.java, FavoritsPokemonsDatabase.DB_NAME
     ).build()
-
-//    @Singleton
-//    @Provides
-//    fun favoritesPokemonRepo(db: FavoritsPokemonsDatabase): IFavoritesPokemonsRepo = RoomFavoritesPokemonsRepo(db)
-
 }
