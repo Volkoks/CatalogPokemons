@@ -2,7 +2,7 @@ package com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo
 
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Sprites
-import com.example.catalogpokemons.mvp.model.room.database.PokemonDatabase
+import com.example.catalogpokemons.mvp.model.room.database.FavoritsPokemonsDatabase
 import com.example.catalogpokemons.mvp.model.room.entity.RoomPokemon
 import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
 import io.reactivex.rxjava3.core.Single
@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 /**
  * Репозиторий для Избранных покемонов(добавление в избранное/получение избранных покемонов)
  */
-class RoomFavoritesPokemonsRepo(val db: PokemonDatabase) : IFavoritesPokemonsRepo {
+class RoomFavoritesPokemonsRepo(val db: FavoritsPokemonsDatabase) : IFavoritesPokemonsRepo {
 
 
     override fun addPokemon(pokemon: Pokemon?) = Single.fromCallable {

@@ -8,7 +8,7 @@ import com.example.catalogpokemons.mvp.model.room.entity.RoomPokemon
 import com.example.catalogpokemons.mvp.model.room.entity.RoomSprites
 
 @Database(entities = [RoomPokemon::class,RoomSprites::class],version = 1)
-abstract class PokemonDatabase : RoomDatabase() {
+abstract class FavoritsPokemonsDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "pokemon_db"
     }

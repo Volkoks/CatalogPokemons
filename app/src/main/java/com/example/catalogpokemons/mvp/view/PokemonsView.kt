@@ -9,4 +9,5 @@ interface PokemonsView:MvpView {
     fun init()
     fun updateList()
     fun snowError(error:Throwable)
+    fun finish()
 }

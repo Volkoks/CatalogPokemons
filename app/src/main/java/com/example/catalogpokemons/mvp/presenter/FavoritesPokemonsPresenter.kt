@@ -1,7 +1,7 @@
 package com.example.catalogpokemons.mvp.presenter
 
 import com.example.catalogpokemons.mvp.model.retrofit.entity.pokemon.Pokemon
-import com.example.catalogpokemons.mvp.model.room.repositories.favorites.IFavoritesPokemonsRepo
+import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
 import com.example.catalogpokemons.mvp.presenter.list.IPokemonListPresenter
 import com.example.catalogpokemons.mvp.view.FavoritesPokemonsView
 import com.example.catalogpokemons.mvp.view.PokemonItemView

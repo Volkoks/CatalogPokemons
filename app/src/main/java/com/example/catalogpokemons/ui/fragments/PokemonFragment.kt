@@ -6,7 +6,7 @@ import android.view.*
 import android.widget.ImageView
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
+import com.example.catalogpokemons.di.pokemons.PokemonsSubcomponent
 import com.example.catalogpokemons.mvp.model.MENU_POKEMON
 import com.example.catalogpokemons.mvp.model.POKEMON
 import com.example.catalogpokemons.mvp.model.retrofit.entity.Results
@@ -33,15 +33,14 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
                 putParcelable(POKEMON, result)
             }
         }
-
     }
 
-    var favoritesSubcomponent: FavoritesPokemonsSubcomponent? = null
+    var pokemonsSubcomponent: PokemonsSubcomponent? = null
 
     private val presenter: PokemonPresenter by moxyPresenter {
-        favoritesSubcomponent = PokemonApp.instance.initFavoritesSubcomponent()
+        pokemonsSubcomponent = PokemonApp.instance.initPokemonsSubcomponent()
         PokemonPresenter().apply {
-            favoritesSubcomponent?.inject(this)
+            pokemonsSubcomponent?.inject(this)
         }
     }
 
@@ -86,8 +85,8 @@ class PokemonFragment(val imageLoader: IImageLoader<ImageView>) : MvpAppCompatFr
     }
 
     override fun finish() {
-        favoritesSubcomponent = null
-        PokemonApp.instance.finishFavoritesSubcomponent()
+        pokemonsSubcomponent = null
+        PokemonApp.instance.finishPokemonsSubcomponent()
     }
 
     override fun backPressed() = presenter.backPressed()

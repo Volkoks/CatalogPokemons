@@ -5,10 +5,7 @@ import com.example.catalogpokemons.di.component.AppComponent
 import com.example.catalogpokemons.di.component.DaggerAppComponent
 import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
 import com.example.catalogpokemons.di.module.AppModule
-import dagger.Component
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
-import javax.inject.Inject
+import com.example.catalogpokemons.di.pokemons.PokemonsSubcomponent
 
 class PokemonApp : Application() {
     companion object {
@@ -18,6 +15,7 @@ class PokemonApp : Application() {
     lateinit var appComponent: AppComponent
 
     var favoritesPokemonsSubcomponent: FavoritesPokemonsSubcomponent? = null
+    var pokemonsSubcomponent: PokemonsSubcomponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -31,5 +29,13 @@ class PokemonApp : Application() {
 
     fun finishFavoritesSubcomponent() {
         favoritesPokemonsSubcomponent = null
+    }
+
+    fun initPokemonsSubcomponent() = appComponent.pokemonsSubcomponent().also {
+        pokemonsSubcomponent = it
+    }
+
+    fun finishPokemonsSubcomponent(){
+        pokemonsSubcomponent = null
     }
 }
