@@ -2,6 +2,7 @@ package com.example.catalogpokemons.di.component
 
 import com.example.catalogpokemons.di.favorites.FavoritesPokemonsSubcomponent
 import com.example.catalogpokemons.di.module.*
+import com.example.catalogpokemons.di.pokemons.PokemonsSubcomponent
 import com.example.catalogpokemons.mvp.presenter.*
 import com.example.catalogpokemons.ui.activity.MainActivity
 import com.example.catalogpokemons.ui.fragments.FavoritesPokemonsFragment
@@ -24,11 +25,8 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun favoritesPokemonsSubcomponent(): FavoritesPokemonsSubcomponent
+    fun pokemonsSubcomponent(): PokemonsSubcomponent
 
     fun inject(mainActivity: MainActivity)
     fun inject(mainActivityPresenter: MainActivityPresenter)
-    fun inject(pokemonsPresenter: PokemonsPresenter)
-    //    fun inject(pokemonPresenter: PokemonPresenter)
-//    fun inject(favoritesPokemonsPresenter: FavoritesPokemonsPresenter)
-//    fun inject(favoritPokemonPresenter: FavoritPokemonPresenter)
 }

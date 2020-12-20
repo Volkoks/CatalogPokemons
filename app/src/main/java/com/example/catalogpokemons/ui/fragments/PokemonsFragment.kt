@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.catalogpokemons.R
 import com.example.catalogpokemons.app.PokemonApp
+import com.example.catalogpokemons.di.pokemons.PokemonsSubcomponent
 import com.example.catalogpokemons.mvp.model.APP_NAME
 import com.example.catalogpokemons.mvp.view.image.GlideImgLoader
 import com.example.catalogpokemons.mvp.presenter.PokemonsPresenter
@@ -25,9 +26,12 @@ class PokemonsFragment : MvpAppCompatFragment(), PokemonsView, BackButtonListene
         fun newInstance() = PokemonsFragment()
     }
 
+    var pokemonsSubcomponent: PokemonsSubcomponent? = null
+
     val presenter: PokemonsPresenter by moxyPresenter {
+        pokemonsSubcomponent = PokemonApp.instance.initPokemonsSubcomponent()
         PokemonsPresenter().apply {
-            PokemonApp.instance.appComponent.inject(this)
+            pokemonsSubcomponent?.inject(this)
         }
 
     }

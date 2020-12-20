@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Module
 class RepoModule {
 
-    @Singleton
-    @Provides
-    fun PokeRepo(api: IPokemonDataSource): IPokemonsRepos = PokemonsRepo(api)
+//    @Singleton
+//    @Provides
+//    fun PokeRepo(api: IPokemonDataSource): IPokemonsRepos = PokemonsRepo(api)
 }
