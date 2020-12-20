@@ -48,4 +48,9 @@ class FavoritPokemonPresenter : MvpPresenter<PokemonView>() {
         router.exit()
         return true
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.finish()
+    }
 }

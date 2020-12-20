@@ -2,9 +2,7 @@ package com.example.catalogpokemons.di.module
 
 import androidx.room.Room
 import com.example.catalogpokemons.app.PokemonApp
-import com.example.catalogpokemons.mvp.model.room.database.PokemonDatabase
-import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.IFavoritesPokemonsRepo
-import com.example.catalogpokemons.mvp.model.room.favoritesPokemonsRepo.RoomFavoritesPokemonsRepo
+import com.example.catalogpokemons.mvp.model.room.database.FavoritsPokemonsDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,12 +12,8 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun db(app: PokemonApp): PokemonDatabase = Room.databaseBuilder(
-        app, PokemonDatabase::class.java, PokemonDatabase.DB_NAME
+    fun favoritsPokemonsDatabase(app: PokemonApp): FavoritsPokemonsDatabase = Room.databaseBuilder(
+        app, FavoritsPokemonsDatabase::class.java, FavoritsPokemonsDatabase.DB_NAME
     ).build()
-
-    @Singleton
-    @Provides
-    fun favoritesPokemonRepo(db: PokemonDatabase):IFavoritesPokemonsRepo = RoomFavoritesPokemonsRepo(db)
 
 }

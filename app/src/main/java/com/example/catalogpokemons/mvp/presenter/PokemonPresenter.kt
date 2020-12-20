@@ -58,4 +58,9 @@ class PokemonPresenter() : MvpPresenter<PokemonView>() {
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.finish()
+    }
+
 }

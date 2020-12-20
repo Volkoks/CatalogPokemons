@@ -10,4 +10,5 @@ interface PokemonView:MvpView {
     fun init(pokemon: Pokemon)
     fun loadImage(url:String)
     fun showError(e: Throwable)
+    fun finish()
 }

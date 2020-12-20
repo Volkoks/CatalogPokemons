@@ -71,7 +71,10 @@ class PokemonsPresenter() : MvpPresenter<PokemonsView>() {
                 })
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.finish()
+    }
     fun backPressed(): Boolean {
         router.exit()
         return true
