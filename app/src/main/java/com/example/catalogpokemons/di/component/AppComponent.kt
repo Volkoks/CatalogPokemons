@@ -24,6 +24,7 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
+
     fun favoritesPokemonsSubcomponent(): FavoritesPokemonsSubcomponent
     fun pokemonsSubcomponent(): PokemonsSubcomponent
 
